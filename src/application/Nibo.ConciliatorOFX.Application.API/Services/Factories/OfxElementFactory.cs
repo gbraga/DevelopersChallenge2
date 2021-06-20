@@ -11,7 +11,7 @@ namespace Nibo.ConciliatorOFX.Application.API.Services.Factories
 {
     public class OfxElementFactory
     {
-        public static BankStatementDTO CreateElement(XmlDocument xmlDocument)
+        public BankStatementDTO CreateElement(XmlDocument xmlDocument)
         {
             var stmtrs = xmlDocument.GetElementsByTagName("STMTRS");
 
@@ -60,14 +60,14 @@ namespace Nibo.ConciliatorOFX.Application.API.Services.Factories
             return bankStatement;
         }
 
-        private static TransactionType GetTransactionType(string trasactionType) =>
+        private TransactionType GetTransactionType(string trasactionType) =>
             trasactionType switch
             {
                 "DEBIT" => TransactionType.DEBIT,
                 "CREDIT" => TransactionType.CREDIT,
             };
 
-        private static AccountType GetAccountType(string accountType) =>
+        private AccountType GetAccountType(string accountType) =>
             accountType switch
             {
                 "CHECKING" => AccountType.CHECKING,

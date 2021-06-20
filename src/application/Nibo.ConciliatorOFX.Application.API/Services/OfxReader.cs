@@ -9,9 +9,11 @@ namespace Nibo.ConciliatorOFX.Application.API.Services
 {
     public class OfxReader : IOfxReader
     {
-        public OfxReader()
-        {
+        private readonly OfxElementFactory _ofxElementFactory;
 
+        public OfxReader(OfxElementFactory ofxElementFactory)
+        {
+            _ofxElementFactory = ofxElementFactory;
         }
 
         public BankTransactionsList ReadOfxFile(string filename)
@@ -39,7 +41,7 @@ namespace Nibo.ConciliatorOFX.Application.API.Services
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
 
-            bankStatement = OfxElementFactory.CreateElement(xmlDocument);
+            bankStatement = _ofxElementFactory.CreateElement(xmlDocument);
 
             return bankStatement;
         }
