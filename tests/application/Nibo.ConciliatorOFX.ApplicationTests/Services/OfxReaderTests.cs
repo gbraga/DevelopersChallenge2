@@ -17,7 +17,7 @@ namespace Nibo.ConciliatorOFX.ApplicationTests.Services
             OfxParser ofxReader = new OfxParser(ofxElementFactoryMock.Object);
 
             // Act
-            BankStatementDTO actualBankTransactions = ofxReader.Convert(extrato1);
+            BankStatementDTO actualBankTransactions = ofxReader.ConvertToBankStatement(extrato1);
 
             // Assert
             Assert.NotNull(actualBankTransactions);

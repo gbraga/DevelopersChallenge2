@@ -12,7 +12,7 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
             Amount = amount;
             Memo = memo;
         }
-
+        public int BankTransactionId { get; private set; }
         public TransactionType TransactionType { get; private set; }
         public DateTime PostedDate { get; private set; }
         public decimal Amount { get; private set; }

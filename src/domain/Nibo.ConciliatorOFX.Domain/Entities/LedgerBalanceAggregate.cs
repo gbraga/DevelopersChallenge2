@@ -10,6 +10,7 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
             Date = date;
         }
 
+        public int LedgerBalanceAggregateId { get; set; }
         public decimal Amount { get; private set; }
         public DateTime Date { get; private set; }
     }
