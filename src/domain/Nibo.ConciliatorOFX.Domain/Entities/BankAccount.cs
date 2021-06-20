@@ -4,6 +4,8 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
 {
     public class BankAccount : IOfxElement
     {
+        public BankAccount() { }
+
         public BankAccount(int bankId, int accountId, AccountType accountType)
         {
             BankId = bankId;
@@ -11,6 +13,7 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
             AccountType = accountType;
         }
 
+        public int BankAccountId { get; private set; }
         public int BankId { get; private set; }
         public long AccountId { get; private set; }
         public AccountType AccountType { get; private set; }

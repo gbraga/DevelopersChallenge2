@@ -4,6 +4,8 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
 {
     public class LedgerBalanceAggregate
     {
+        public LedgerBalanceAggregate() { }
+
         public LedgerBalanceAggregate(decimal amount, DateTime date)
         {
             Amount = amount;

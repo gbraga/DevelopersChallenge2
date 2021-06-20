@@ -5,6 +5,8 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
 {
     public class BankTransaction : IOfxElement
     {
+        public BankTransaction() { }
+
         public BankTransaction(TransactionType transactionType, DateTime postedDate, decimal amount, string memo)
         {
             TransactionType = transactionType;

@@ -4,6 +4,8 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
 {
     public class BankStatement : IOfxElement
     {
+        public BankStatement() { }
+
         public BankStatement(string currency, BankAccount bankAccount, BankTransactionsList bankTransactionsList, LedgerBalanceAggregate ledgerBalanceAggregate)
         {
             Currency = currency;

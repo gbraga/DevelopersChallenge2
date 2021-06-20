@@ -9,6 +9,8 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
     {
         private IList<BankTransaction> _bankTransactions;
 
+        public BankTransactionsList() { }
+
         public BankTransactionsList(DateTime startDate, DateTime endDate, IList<BankTransaction> bankTransactions)
         {
             StartDate = startDate;

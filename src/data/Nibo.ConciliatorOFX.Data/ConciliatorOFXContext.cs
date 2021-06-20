@@ -25,7 +25,7 @@ namespace Nibo.ConciliatorOFX.Data
             {
                 var optionsBuilder = new DbContextOptionsBuilder<ConciliatorOFXContext>();
                 optionsBuilder.UseSqlServer(
-                    @"Server=(localdb)\mssqllocaldb;Database=Nibo.ConciliatorOFX;Integrated Security=True");
+                    @"Server=Localhost;Database=Nibo.ConciliatorOFX;User Id=sa;Password=1q2w3e%&!;");
 
                 return new ConciliatorOFXContext(optionsBuilder.Options);
             }
