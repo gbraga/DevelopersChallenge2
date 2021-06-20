@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\data\Nibo.ConciliatorOFX.Data\Nibo.ConciliatorOFX.Data.csproj" />
     <ProjectReference Include="..\..\domain\Nibo.ConciliatorOFX.Domain\Nibo.ConciliatorOFX.Domain.csproj" />
   </ItemGroup>
 

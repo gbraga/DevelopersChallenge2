@@ -14,7 +14,7 @@ namespace Nibo.ConciliatorOFX.ApplicationTests.Services
             // Arrange
             var extrato1 = ReadOfxFileIntoString("extrato1");
             var ofxElementFactoryMock = new Mock<OfxElementFactory>();
-            OfxReader ofxReader = new OfxReader(ofxElementFactoryMock.Object);
+            OfxParser ofxReader = new OfxParser(ofxElementFactoryMock.Object);
 
             // Act
             BankStatementDTO actualBankTransactions = ofxReader.Convert(extrato1);

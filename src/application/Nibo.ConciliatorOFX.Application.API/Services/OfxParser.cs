@@ -1,32 +1,25 @@
 ﻿using Nibo.ConciliatorOFX.Application.API.DTOs;
 using Nibo.ConciliatorOFX.Application.API.Services.Factories;
-using Nibo.ConciliatorOFX.Domain.Entities;
-using System;
 using System.IO;
 using System.Xml;
 
 namespace Nibo.ConciliatorOFX.Application.API.Services
 {
-    public class OfxReader : IOfxReader
+    public class OfxParser : IOfxParser
     {
         private readonly OfxElementFactory _ofxElementFactory;
 
-        public OfxReader(OfxElementFactory ofxElementFactory)
+        public OfxParser(OfxElementFactory ofxElementFactory)
         {
             _ofxElementFactory = ofxElementFactory;
         }
 
-        public BankTransactionsList ReadOfxFile(string filename)
-        {
-            throw new NotImplementedException();
-        }
-
-        public BankStatementDTO Convert(string content)
+        public BankStatementDTO ConvertToBankStatement(string ofxFileContent)
         {
             BankStatementDTO bankStatement = null;
             string xml = string.Empty;
 
-            using (TextReader sr = new StringReader(content))
+            using (TextReader sr = new StringReader(ofxFileContent))
             {
                 string line = string.Empty;
                 
@@ -74,6 +67,5 @@ namespace Nibo.ConciliatorOFX.Application.API.Services
 
         private bool IsAProperty(string line) =>
             line.Contains('>') && line.IndexOf('>') != line.Length - 1;
-
     }
 }
