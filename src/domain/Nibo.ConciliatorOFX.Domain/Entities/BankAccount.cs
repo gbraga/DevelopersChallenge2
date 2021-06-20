@@ -6,7 +6,7 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
     {
         public BankAccount() { }
 
-        public BankAccount(int bankId, int accountId, AccountType accountType)
+        public BankAccount(int bankId, long accountId, AccountType accountType)
         {
             BankId = bankId;
             AccountId = accountId;

@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nibo.ConciliatorOFX.Application.API.DTOs;
 using Nibo.ConciliatorOFX.Application.API.Services;
+using Nibo.ConciliatorOFX.Data;
+using Nibo.ConciliatorOFX.Domain.Entities;
+using Nibo.ConciliatorOFX.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,10 +21,20 @@ namespace Nibo.ConciliatorOFX.Application.API.Controllers
     public class OfxController : ControllerBase
     {
         private readonly IOfxParser _ofxParser;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBankStatementRepository _bankStatementRepository;
+        private readonly IMapper _mapper;
 
-        public OfxController(IOfxParser ofxParser)
+        public OfxController(
+            IOfxParser ofxParser,
+            IUnitOfWork unitOfWork,
+            IBankStatementRepository bankStatementRepository,
+            IMapper mapper)
         {
             _ofxParser = ofxParser;
+            _unitOfWork = unitOfWork;
+            _bankStatementRepository = bankStatementRepository;
+            _mapper = mapper;
         }
 
         [HttpPost("Import")]
@@ -38,6 +52,17 @@ namespace Nibo.ConciliatorOFX.Application.API.Controllers
                     var fileBytes = ms.ToArray();
                     string decodedString = Encoding.UTF8.GetString(fileBytes);
                     bankStatementDTO = _ofxParser.ConvertToBankStatement(decodedString);
+                }
+
+                try
+                {
+                    var bankStatement = _mapper.Map<BankStatement>(bankStatementDTO);
+                    _bankStatementRepository.Save(bankStatement);
+                    _unitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
                 }
             }
 
