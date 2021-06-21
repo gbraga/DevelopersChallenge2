@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Nibo.ConciliatorOFX.Domain.Entities
 {
-    public class BankTransactionsList : IOfxElement
+    public class BankTransactionsList
     {
         private IList<BankTransaction> _bankTransactions;
 

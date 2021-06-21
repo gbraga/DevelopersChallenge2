@@ -3,7 +3,7 @@ using System;
 
 namespace Nibo.ConciliatorOFX.Domain.Entities
 {
-    public class BankTransaction : IOfxElement
+    public class BankTransaction
     {
         public BankTransaction() { }
 

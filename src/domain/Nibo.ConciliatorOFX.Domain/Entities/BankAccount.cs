@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Nibo.ConciliatorOFX.Domain.Entities
 {
-    public class BankAccount : IOfxElement
+    public class BankAccount
     {
         public BankAccount() { }
 

@@ -1,5 +1,5 @@
 using Moq;
-using Nibo.ConciliatorOFX.Application.API.DTOs;
+using Nibo.ConciliatorOFX.Data.DTOs;
 using Nibo.ConciliatorOFX.Application.API.Services;
 using Nibo.ConciliatorOFX.Application.API.Services.Factories;
 using Xunit;

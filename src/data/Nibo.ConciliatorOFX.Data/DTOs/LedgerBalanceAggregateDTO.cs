@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nibo.ConciliatorOFX.Application.API.DTOs
+namespace Nibo.ConciliatorOFX.Data.DTOs
 {
     public class LedgerBalanceAggregateDTO
     {

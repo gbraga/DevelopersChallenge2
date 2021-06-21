@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Nibo.ConciliatorOFX.Application.API.DTOs;
 using Nibo.ConciliatorOFX.Application.API.Services;
 using Nibo.ConciliatorOFX.Data;
+using Nibo.ConciliatorOFX.Data.DTOs;
+using Nibo.ConciliatorOFX.Data.Repositories;
 using Nibo.ConciliatorOFX.Domain.Entities;
-using Nibo.ConciliatorOFX.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +17,7 @@ namespace Nibo.ConciliatorOFX.Application.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OfxController : MainController
+    public class OfxController : ControllerBase
     {
         private readonly IOfxParser _ofxParser;
         private readonly IUnitOfWork _unitOfWork;
@@ -63,11 +61,11 @@ namespace Nibo.ConciliatorOFX.Application.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return CustomResponse(ex.Message);
+                    return BadRequest(ex.Message);
                 }
             }
 
-            return CustomResponse();
+            return Ok();
         }
 
         [HttpGet()]

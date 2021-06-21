@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualBasic;
-using Nibo.ConciliatorOFX.Application.API.DTOs;
+using Nibo.ConciliatorOFX.Data.DTOs;
 using Nibo.ConciliatorOFX.Domain.Entities;
 using Nibo.ConciliatorOFX.Domain.Types;
 using System;

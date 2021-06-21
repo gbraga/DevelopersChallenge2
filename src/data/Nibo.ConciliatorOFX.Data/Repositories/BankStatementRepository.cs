@@ -1,9 +1,10 @@
-﻿using Nibo.ConciliatorOFX.Domain.Entities;
-using Nibo.ConciliatorOFX.Domain.Models;
-using System.Threading.Tasks;
-using System.Linq;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Nibo.ConciliatorOFX.Data.DTOs;
+using Nibo.ConciliatorOFX.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Nibo.ConciliatorOFX.Data.Repositories
 {
@@ -11,22 +12,38 @@ namespace Nibo.ConciliatorOFX.Data.Repositories
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ConciliatorOFXContext _context;
+        private readonly IMapper _mapper;
 
-        public BankStatementRepository(IUnitOfWork unitOfWork, ConciliatorOFXContext context)
+        public BankStatementRepository(
+            IUnitOfWork unitOfWork,
+            ConciliatorOFXContext context,
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<ICollection<BankStatement>> Conciliation(int[] ids) =>
+        public async Task<ICollection<BankStatementDTO>> Conciliation(int[] ids) => 
             await _context.BankStatements
-                .FromSqlRaw(@$"SELECT DISTINCT
-                                  [TransactionType]
-                                  ,[PostedDate]
-                                  ,[Amount]
-                                  ,[Memo]
-                            FROM [Nibo.ConciliatorOFX].[dbo].[BankTransactions] BK
-                            WHERE BK.BankTransactionsListId IN ({string.Join(",", ids)})")
+                .Select(s => new BankStatementDTO { 
+                    Currency = s.Currency, 
+                    BankAccount = _mapper.Map<BankAccountDTO>(s.BankAccount), 
+                    BankTransactionsList = new BankTransactionsListDTO
+                    {
+                        StartDate = s.BankTransactionsList.StartDate,
+                        EndDate = s.BankTransactionsList.EndDate,
+                        BankTransactions = s.BankTransactionsList.BankTransactions
+                            .Select(x => new BankTransactionDTO
+                            {
+                                TransactionType = x.TransactionType,
+                                PostedDate = x.PostedDate,
+                                Amount = x.Amount,
+                                Memo = x.Memo
+                            }).ToList()
+                    },
+                    LedgerBalanceAggregate = _mapper.Map<LedgerBalanceAggregateDTO>(s.LedgerBalanceAggregate) 
+                })
                 .ToListAsync();
 
         public async Task<ICollection<BankStatement>> Get(int skip = 0, int take = 20) =>

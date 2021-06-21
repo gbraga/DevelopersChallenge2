@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Nibo.ConciliatorOFX.Application.API.DTOs
+namespace Nibo.ConciliatorOFX.Data.DTOs
 {
     public class BankTransactionsListDTO
     {

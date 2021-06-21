@@ -6,7 +6,6 @@ using Nibo.ConciliatorOFX.Application.API.Services;
 using Nibo.ConciliatorOFX.Application.API.Services.Factories;
 using Nibo.ConciliatorOFX.Data;
 using Nibo.ConciliatorOFX.Data.Repositories;
-using Nibo.ConciliatorOFX.Domain.Models;
 
 namespace Nibo.ConciliatorOFX.Application.API.Configuration
 {

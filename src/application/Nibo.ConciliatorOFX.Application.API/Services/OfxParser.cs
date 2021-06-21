@@ -1,4 +1,4 @@
-﻿using Nibo.ConciliatorOFX.Application.API.DTOs;
+﻿using Nibo.ConciliatorOFX.Data.DTOs;
 using Nibo.ConciliatorOFX.Application.API.Services.Factories;
 using System.IO;
 using System.Xml;

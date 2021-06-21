@@ -3,7 +3,7 @@
 namespace Nibo.ConciliatorOFX.Domain.Entities
 {
     //<STMTRS>
-    public class BankStatement : IOfxElement
+    public class BankStatement
     {
         public BankStatement() { }
 

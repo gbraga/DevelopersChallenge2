@@ -1,6 +1,6 @@
 ﻿using Nibo.ConciliatorOFX.Domain.Types;
 
-namespace Nibo.ConciliatorOFX.Application.API.DTOs
+namespace Nibo.ConciliatorOFX.Data.DTOs
 {
     public class BankAccountDTO
     {
