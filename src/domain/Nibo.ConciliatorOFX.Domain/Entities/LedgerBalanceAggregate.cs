@@ -15,5 +15,8 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
         public int LedgerBalanceAggregateId { get; set; }
         public decimal Amount { get; private set; }
         public DateTime Date { get; private set; }
+
+        //public int BankStatementId { get; private set; }
+        //public virtual BankStatement BankStatement { get; private set; }
     }
 }

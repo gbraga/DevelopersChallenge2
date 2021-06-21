@@ -27,7 +27,8 @@ namespace Nibo.ConciliatorOFX.Application.API.Configuration
                 .AddSingleton(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddDbContext<ConciliatorOFXContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("ApplicationDbContext")));
+                options.UseLazyLoadingProxies()
+                       .UseSqlServer(configuration.GetConnectionString("ApplicationDbContext")));
                 
 
 

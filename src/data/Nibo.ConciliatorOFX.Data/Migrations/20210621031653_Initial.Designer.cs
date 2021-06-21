@@ -10,8 +10,8 @@ using Nibo.ConciliatorOFX.Data;
 namespace Nibo.ConciliatorOFX.Data.Migrations
 {
     [DbContext(typeof(ConciliatorOFXContext))]
-    [Migration("20210620064046_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210621031653_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,16 +49,16 @@ namespace Nibo.ConciliatorOFX.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BankAccountId")
+                    b.Property<int>("BankAccountId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BankTransactionsListId")
+                    b.Property<int>("BankTransactionsListId")
                         .HasColumnType("int");
 
                     b.Property<string>("Currency")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LedgerBalanceAggregateId")
+                    b.Property<int>("LedgerBalanceAggregateId")
                         .HasColumnType("int");
 
                     b.HasKey("BankStatementId");
@@ -82,7 +82,7 @@ namespace Nibo.ConciliatorOFX.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("BankTransactionsListId")
+                    b.Property<int>("BankTransactionsListId")
                         .HasColumnType("int");
 
                     b.Property<string>("Memo")
@@ -141,15 +141,21 @@ namespace Nibo.ConciliatorOFX.Data.Migrations
                 {
                     b.HasOne("Nibo.ConciliatorOFX.Domain.Entities.BankAccount", "BankAccount")
                         .WithMany()
-                        .HasForeignKey("BankAccountId");
+                        .HasForeignKey("BankAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Nibo.ConciliatorOFX.Domain.Entities.BankTransactionsList", "BankTransactionsList")
                         .WithMany()
-                        .HasForeignKey("BankTransactionsListId");
+                        .HasForeignKey("BankTransactionsListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Nibo.ConciliatorOFX.Domain.Entities.LedgerBalanceAggregate", "LedgerBalanceAggregate")
                         .WithMany()
-                        .HasForeignKey("LedgerBalanceAggregateId");
+                        .HasForeignKey("LedgerBalanceAggregateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("BankAccount");
 
@@ -162,7 +168,9 @@ namespace Nibo.ConciliatorOFX.Data.Migrations
                 {
                     b.HasOne("Nibo.ConciliatorOFX.Domain.Entities.BankTransactionsList", null)
                         .WithMany("BankTransactions")
-                        .HasForeignKey("BankTransactionsListId");
+                        .HasForeignKey("BankTransactionsListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Nibo.ConciliatorOFX.Domain.Entities.BankTransactionsList", b =>

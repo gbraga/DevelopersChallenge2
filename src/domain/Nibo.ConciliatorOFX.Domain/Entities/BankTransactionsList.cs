@@ -21,6 +21,9 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
         public int BankTransactionsListId { get; set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
-        public IReadOnlyList<BankTransaction> BankTransactions { get { return _bankTransactions.ToList(); } }
+        public virtual IReadOnlyList<BankTransaction> BankTransactions { get { return _bankTransactions.ToList(); } }
+
+        //public int BankStatementId { get; private set; }
+        //public virtual BankStatement BankStatement { get; private set; }
     }
 }

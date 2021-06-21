@@ -1,5 +1,9 @@
 ﻿using Nibo.ConciliatorOFX.Domain.Entities;
 using Nibo.ConciliatorOFX.Domain.Models;
+using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Nibo.ConciliatorOFX.Data.Repositories
 {
@@ -13,6 +17,9 @@ namespace Nibo.ConciliatorOFX.Data.Repositories
             _unitOfWork = unitOfWork;
             _context = context;
         }
+
+        public async Task<ICollection<BankStatement>> Get(int skip = 0, int take = 20) =>
+            await _context.BankStatements.Skip(skip).Take(take).ToListAsync();
 
         public void Save(BankStatement bankStatement) => 
             _context.BankStatements.Add(bankStatement);

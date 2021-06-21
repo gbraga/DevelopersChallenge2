@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Nibo.ConciliatorOFX.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,7 +60,7 @@ namespace Nibo.ConciliatorOFX.Data.Migrations
                     PostedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Memo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BankTransactionsListId = table.Column<int>(type: "int", nullable: true)
+                    BankTransactionsListId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,7 @@ namespace Nibo.ConciliatorOFX.Data.Migrations
                         column: x => x.BankTransactionsListId,
                         principalTable: "BankTransactionsLists",
                         principalColumn: "BankTransactionsListId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,9 +80,9 @@ namespace Nibo.ConciliatorOFX.Data.Migrations
                     BankStatementId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Currency = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BankAccountId = table.Column<int>(type: "int", nullable: true),
-                    BankTransactionsListId = table.Column<int>(type: "int", nullable: true),
-                    LedgerBalanceAggregateId = table.Column<int>(type: "int", nullable: true)
+                    BankAccountId = table.Column<int>(type: "int", nullable: false),
+                    BankTransactionsListId = table.Column<int>(type: "int", nullable: false),
+                    LedgerBalanceAggregateId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,19 +92,19 @@ namespace Nibo.ConciliatorOFX.Data.Migrations
                         column: x => x.BankAccountId,
                         principalTable: "BankAccounts",
                         principalColumn: "BankAccountId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BankStatements_BankTransactionsLists_BankTransactionsListId",
                         column: x => x.BankTransactionsListId,
                         principalTable: "BankTransactionsLists",
                         principalColumn: "BankTransactionsListId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BankStatements_LedgerBalanceAggregates_LedgerBalanceAggregateId",
                         column: x => x.LedgerBalanceAggregateId,
                         principalTable: "LedgerBalanceAggregates",
                         principalColumn: "LedgerBalanceAggregateId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

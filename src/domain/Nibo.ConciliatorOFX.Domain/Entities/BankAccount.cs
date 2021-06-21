@@ -1,4 +1,5 @@
 ﻿using Nibo.ConciliatorOFX.Domain.Types;
+using System.Collections.Generic;
 
 namespace Nibo.ConciliatorOFX.Domain.Entities
 {
@@ -17,5 +18,7 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
         public int BankId { get; private set; }
         public long AccountId { get; private set; }
         public AccountType AccountType { get; private set; }
+
+        //public virtual ICollection<BankStatkement> BankStatement { get; private set; }
     }
 }

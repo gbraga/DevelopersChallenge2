@@ -19,5 +19,8 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
         public DateTime PostedDate { get; private set; }
         public decimal Amount { get; private set; }
         public string Memo { get; private set; }
+
+        public int BankTransactionsListId { get; private set; }
+        //public virtual BankTransactionsList BankTransactionsList { get; private set; }
     }
 }

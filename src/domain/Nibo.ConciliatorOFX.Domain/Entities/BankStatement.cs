@@ -2,6 +2,7 @@
 
 namespace Nibo.ConciliatorOFX.Domain.Entities
 {
+    //<STMTRS>
     public class BankStatement : IOfxElement
     {
         public BankStatement() { }
@@ -16,8 +17,11 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
 
         public int BankStatementId { get; private set; }
         public string Currency { get; private set; }
-        public BankAccount BankAccount { get; private set; }
-        public BankTransactionsList BankTransactionsList { get; private set; }
-        public LedgerBalanceAggregate LedgerBalanceAggregate { get; private set; }
+        public virtual BankAccount BankAccount { get; private set; }
+        public int BankAccountId { get; private set; }
+        public virtual BankTransactionsList BankTransactionsList { get; private set; }
+        public int BankTransactionsListId { get; private set; }
+        public virtual LedgerBalanceAggregate LedgerBalanceAggregate { get; private set; }
+        public int LedgerBalanceAggregateId { get; private set; }
     }
 }

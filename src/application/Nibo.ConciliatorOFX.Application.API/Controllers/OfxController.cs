@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Nibo.ConciliatorOFX.Application.API.DTOs;
 using Nibo.ConciliatorOFX.Application.API.Services;
 using Nibo.ConciliatorOFX.Data;
@@ -18,7 +19,7 @@ namespace Nibo.ConciliatorOFX.Application.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OfxController : ControllerBase
+    public class OfxController : MainController
     {
         private readonly IOfxParser _ofxParser;
         private readonly IUnitOfWork _unitOfWork;
@@ -62,11 +63,19 @@ namespace Nibo.ConciliatorOFX.Application.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest(ex.Message);
+                    return CustomResponse(ex.Message);
                 }
             }
 
-            return Ok();
+            return CustomResponse();
+        }
+
+        [HttpGet()]
+        public async Task<ActionResult<ICollection<BankStatement>>> Get()
+        {
+            var bankStatement = await _bankStatementRepository.Get();
+
+            return Ok(bankStatement);
         }
     }
 }

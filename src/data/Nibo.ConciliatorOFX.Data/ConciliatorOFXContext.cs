@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Nibo.ConciliatorOFX.Domain.Entities;
 
 namespace Nibo.ConciliatorOFX.Data
@@ -15,22 +16,16 @@ namespace Nibo.ConciliatorOFX.Data
         public DbSet<BankTransactionsList> BankTransactionsLists { get; set; }
         public DbSet<LedgerBalanceAggregate> LedgerBalanceAggregates { get; set; }
 
-        //public sealed class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ConciliatorOFXContext>
-        //{
-        //    private readonly DatabaseSettings _dbSettings;
+        public sealed class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ConciliatorOFXContext>
+        {
+            public ConciliatorOFXContext CreateDbContext(string[] args)
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<ConciliatorOFXContext>();
+                optionsBuilder.UseSqlServer(
+                    @"Server=Localhost;Database=Nibo.ConciliatorOFX;User Id=sa;Password=1q2w3e%&!;");
 
-        //    public ApplicationDbContextFactory(IOptions<DatabaseSettings> dbSettings)
-        //    {
-        //        _dbSettings = dbSettings.Value;
-        //    }
-
-        //    public ConciliatorOFXContext CreateDbContext(string[] args)
-        //    {
-        //        var optionsBuilder = new DbContextOptionsBuilder<ConciliatorOFXContext>();
-        //        optionsBuilder.UseSqlServer(_dbSettings.ConnectionString);
-
-        //        return new ConciliatorOFXContext(optionsBuilder.Options);
-        //    }
-        //}
+                return new ConciliatorOFXContext(optionsBuilder.Options);
+            }
+        }
     }
 }
