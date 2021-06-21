@@ -18,6 +18,17 @@ namespace Nibo.ConciliatorOFX.Data.Repositories
             _context = context;
         }
 
+        public async Task<ICollection<BankStatement>> Conciliation(int[] ids) =>
+            await _context.BankStatements
+                .FromSqlRaw(@$"SELECT DISTINCT
+                                  [TransactionType]
+                                  ,[PostedDate]
+                                  ,[Amount]
+                                  ,[Memo]
+                            FROM [Nibo.ConciliatorOFX].[dbo].[BankTransactions] BK
+                            WHERE BK.BankTransactionsListId IN ({string.Join(",", ids)})")
+                .ToListAsync();
+
         public async Task<ICollection<BankStatement>> Get(int skip = 0, int take = 20) =>
             await _context.BankStatements.Skip(skip).Take(take).ToListAsync();
 

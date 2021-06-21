@@ -8,5 +8,6 @@ namespace Nibo.ConciliatorOFX.Domain.Models
     {
         void Save(BankStatement bankStatement);
         Task<ICollection<BankStatement>> Get(int skip = 0, int take = 20);
+        Task<ICollection<BankStatement>> Conciliation(int[] ids);
     }
 }

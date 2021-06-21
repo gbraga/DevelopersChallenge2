@@ -71,9 +71,19 @@ namespace Nibo.ConciliatorOFX.Application.API.Controllers
         }
 
         [HttpGet()]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ICollection<BankStatement>>> Get()
         {
             var bankStatement = await _bankStatementRepository.Get();
+
+            return Ok(bankStatement);
+        }
+
+        [HttpPost("Conciliation")]
+        public async Task<IActionResult> Conciliation([FromBody] int[] bankStatementIds)
+        {
+            var bankStatement = await _bankStatementRepository.Conciliation(bankStatementIds);
 
             return Ok(bankStatement);
         }
