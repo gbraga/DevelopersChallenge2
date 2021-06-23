@@ -78,10 +78,10 @@ namespace Nibo.ConciliatorOFX.Application.API.Controllers
             return Ok(bankStatement);
         }
 
-        [HttpPost("Conciliation")]
+        [HttpPost("Conciliate")]
         public async Task<IActionResult> Conciliation([FromBody] int[] bankStatementIds)
         {
-            var bankStatement = await _bankStatementRepository.Conciliation(bankStatementIds);
+            var bankStatement = await _bankStatementRepository.Get(bankStatementIds);
 
             return Ok(bankStatement);
         }

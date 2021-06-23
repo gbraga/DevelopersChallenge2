@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\application\Nibo.ConciliatorOFX.Application.API\Nibo.ConciliatorOFX.Application.API.csproj" />
+    <ProjectReference Include="..\..\..\src\data\Nibo.ConciliatorOFX.Data\Nibo.ConciliatorOFX.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

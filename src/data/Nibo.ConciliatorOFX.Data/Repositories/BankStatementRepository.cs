@@ -47,7 +47,17 @@ namespace Nibo.ConciliatorOFX.Data.Repositories
                 .ToListAsync();
 
         public async Task<ICollection<BankStatement>> Get(int skip = 0, int take = 20) =>
-            await _context.BankStatements.Skip(skip).Take(take).ToListAsync();
+            await _context.BankStatements
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+        public async Task<ICollection<BankStatement>> Get(int[] ids, int skip = 0, int take = 20) =>
+            await _context.BankStatements
+                .Where(x => ids.Contains(x.BankStatementId))
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
 
         public void Save(BankStatement bankStatement) => 
             _context.BankStatements.Add(bankStatement);

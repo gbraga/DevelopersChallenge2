@@ -14,24 +14,17 @@ namespace Nibo.ConciliatorOFX.Application.API.Configuration
         public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<OfxElementFactory>();
-            services.AddScoped<ConciliatorOFXContext>();
             services.AddScoped<IOfxParser, OfxParser>();
+            services.AddScoped<IOfxConciliate, OfxConciliate>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBankStatementRepository, BankStatementRepository>();
 
             services.AddAutoMapper(typeof(Startup).Assembly);
-
-            services
-                .Configure<DatabaseSettings>(configuration)
-                .AddSingleton(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-
+            
             services.AddDbContext<ConciliatorOFXContext>(options =>
                 options.UseLazyLoadingProxies()
                        .UseSqlServer(configuration.GetConnectionString("ApplicationDbContext")));
-                
-
-
-            //services.AddSingleton(dbSettings);
 
             return services;
         }

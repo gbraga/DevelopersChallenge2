@@ -5,7 +5,7 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
 {
     public class BankAccount
     {
-        public BankAccount() { }
+        protected BankAccount() { }
 
         public BankAccount(int bankId, long accountId, AccountType accountType)
         {
@@ -18,7 +18,5 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
         public int BankId { get; private set; }
         public long AccountId { get; private set; }
         public AccountType AccountType { get; private set; }
-
-        //public virtual ICollection<BankStatkement> BankStatement { get; private set; }
     }
 }

@@ -5,7 +5,7 @@ namespace Nibo.ConciliatorOFX.Domain.Entities
 {
     public class BankTransaction
     {
-        public BankTransaction() { }
+        protected BankTransaction() { }
 
         public BankTransaction(TransactionType transactionType, DateTime postedDate, decimal amount, string memo)
         {
