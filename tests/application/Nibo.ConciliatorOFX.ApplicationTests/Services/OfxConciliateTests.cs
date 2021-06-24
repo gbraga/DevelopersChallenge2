@@ -3,8 +3,6 @@ using Moq;
 using Nibo.ConciliatorOFX.Application.API.Services;
 using Nibo.ConciliatorOFX.Data.DTOs;
 using Nibo.ConciliatorOFX.Domain.Entities;
-using Nibo.ConciliatorOFX.Domain.Types;
-using System;
 using System.Collections.Generic;
 using Xunit;
 

@@ -22,6 +22,13 @@ namespace Nibo.ConciliatorOFX.Application.API
         {
             services.RegisterServices(Configuration);
 
+            services.AddCors(x => x.AddPolicy("Total", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
+            }));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -42,6 +49,8 @@ namespace Nibo.ConciliatorOFX.Application.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("Total");
 
             app.UseAuthorization();
 

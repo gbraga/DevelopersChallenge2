@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["src/application/Nibo.ConciliatorOFX.Application.API/Nibo.ConciliatorOFX.Application.API.csproj", "src/application/Nibo.ConciliatorOFX.Application.API/"]
+COPY ["./application/Nibo.ConciliatorOFX.Application.API/Nibo.ConciliatorOFX.Application.API.csproj", "src/application/Nibo.ConciliatorOFX.Application.API/"]
+COPY ["./data/Nibo.ConciliatorOFX.Data/Nibo.ConciliatorOFX.Data.csproj", "src/data/Nibo.ConciliatorOFX.Data/"]
+COPY ["./domain/Nibo.ConciliatorOFX.Domain/Nibo.ConciliatorOFX.Domain.csproj", "src/domain/Nibo.ConciliatorOFX.Domain/"]
+
 RUN dotnet restore "src/application/Nibo.ConciliatorOFX.Application.API/Nibo.ConciliatorOFX.Application.API.csproj"
 COPY . .
-WORKDIR "/src/src/application/Nibo.ConciliatorOFX.Application.API"
+WORKDIR "application/Nibo.ConciliatorOFX.Application.API/"
 RUN dotnet build "Nibo.ConciliatorOFX.Application.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

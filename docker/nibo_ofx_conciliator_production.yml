@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+
+  # sql-server:
+  #   image: nibo-desafio/ofx-conciliation-bd:latest
+  #   container_name: nibo-desafio-bd
+  #   build:
+  #     context: ../sql
+  #     dockerfile: ./Dockerfile
+  #   ports:
+  #     - "1433:1433"
+  #   environment:
+  #     SA_PASSWORD: "1q2w3e%&!"
+  #     ACCEPT_EULA: "Y"
+  
+  web-api:
+    image: nibo-desafio/ofx-conciliation-api:latest
+    container_name: ofx-conciliation-api
+    build:
+      context: ../src
+      dockerfile: ./application/Nibo.ConciliatorOFX.Application.API/Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://*:5001
+
+  web-spa:
+    image: nibo-desafio/ofx-conciliation-spa:latest
+    container_name: ofx-conciliation-spa
+    build:
+      context: ../src
+      dockerfile: ./spa/ofx-conciliation/Dockerfile
+    depends_on:
+      - web-api
+    ports:
+      - "4200:4200"
+    environment:
+      - NODE_ENV=production
+    # command: > 
+    #   bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
